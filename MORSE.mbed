@@ -1,0 +1,112 @@
+#include "mbed.h"
+#define BLINKING_RATE_MS_DOT                                                500
+#define BLINKING_RATE_MS_BTW                                                500
+#define BLINKING_RATE_MS_DASH                                               1000
+#define BLINKING_RATE_MS_WAIT                                               1500
+
+Serial MyPC(USBTX, USBRX);
+
+void clrscr() // Clear the screen
+{
+char clrscr[] = {0x1B, '[', '2' , 'J',0};
+MyPC.printf(clrscr);
+}
+void homescr() // Home the cursor
+{
+char homescr[] = {0x1B, '[' , 'H' , 0};
+MyPC.printf(homescr);
+}
+
+int i = 0;
+
+int main()
+{
+    char Word[50];
+    clrscr();
+    homescr();
+    MyPC.printf("MESSAGE TO MORSE"); // Display heading
+    MyPC.printf("\n\r=================="); // \n new line
+    // \r starts at the beginning of the line
+    MyPC.printf("\n\r Enter the MESAGE: ");
+    MyPC.scanf("%s",Word); 
+    // Initialise the digital pin LED as an output
+    
+    DigitalOut LED(PC_3);
+
+    
+
+    for ( i=0; i<27; i++)
+        if (Word[i]=='A') {
+              LED = 1;
+             wait_ms(BLINKING_RATE_MS_DOT);
+              LED = 0;
+             wait_ms(BLINKING_RATE_MS_BTW);
+              LED = 1;
+             wait_ms(BLINKING_RATE_MS_DASH);
+              LED = 0;
+             wait_ms(BLINKING_RATE_MS_WAIT);        
+            }
+         else if (Word[i]=='B') {
+              LED = 1;
+             wait_ms(BLINKING_RATE_MS_DASH);
+              LED = 0;
+             wait_ms(BLINKING_RATE_MS_BTW);
+              LED = 1;
+             wait_ms(BLINKING_RATE_MS_DOT);
+              LED = 0;
+             wait_ms(BLINKING_RATE_MS_BTW);
+              LED = 1;
+             wait_ms(BLINKING_RATE_MS_DOT);
+              LED = 0;
+             wait_ms(BLINKING_RATE_MS_BTW);   
+              LED = 1;
+             wait_ms(BLINKING_RATE_MS_DOT);
+              LED = 0;
+             wait_ms(BLINKING_RATE_MS_WAIT);        
+            }    
+         else if (Word[i]=='C') {
+	      LED = 1;
+             wait_ms(BLINKING_RATE_MS_DASH);
+		LED = 0;
+             wait_ms(BLINKING_RATE_MS_BTW);
+		LED = 1;
+             wait_ms(BLINKING_RATE_MS_DOT);
+		LED = 0;
+             wait_ms(BLINKING_RATE_MS_BTW);
+		LED = 1;
+             wait_ms(BLINKING_RATE_MS_DASH);
+		LED = 0;
+             wait_ms(BLINKING_RATE_MS_BTW);
+		LED = 1;
+             wait_ms(BLINKING_RATE_MS_DOT);
+		LED = 0;
+             wait_ms(BLINKING_RATE_MS_WAIT);        
+            }     
+         else if (Word[i]=='D') {
+		LED = 1;
+             wait_ms(BLINKING_RATE_MS_DASH);
+		LED = 0;
+             wait_ms(BLINKING_RATE_MS_BTW);
+		LED = 1;
+             wait_ms(BLINKING_RATE_MS_DOT);
+		LED = 0;
+             wait_ms(BLINKING_RATE_MS_BTW);
+		LED = 1;
+             wait_ms(BLINKING_RATE_MS_DOT);
+		LED = 0;
+             wait_ms(BLINKING_RATE_MS_WAIT);        
+            }    
+         else if (Word[i]=='E') {
+		LED = 1;
+             wait_ms(BLINKING_RATE_MS_DOT);   
+		LED = 0;          
+             wait_ms(BLINKING_RATE_MS_WAIT);        
+            }    
+		
+        }
+  
+        
+        
+
+
+            
